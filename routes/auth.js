@@ -21,11 +21,15 @@ router.get('/env', (req, res) => {
 router.get("/login", passport.authenticate("twitter"));
 
 router.get(
-  "/redirect",
-  passport.authenticate("twitter", {
-    successRedirect: CLIENT_URL,
+  '/redirect',
+  passport.authenticate('twitter', {
+    // successRedirect: CLIENT_URL,
     failureRedirect: CLIENT_URL,
-  })
+  }),
+  (req, res) => {
+    console.log('req', req.session, req);
+    res.redirect(`${CLIENT_URL}`);
+  }
 );
 
 module.exports = router;
