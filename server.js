@@ -25,9 +25,9 @@ app.use(
     secret: process.env.COOKIE_KEY,
     resave: true,
     saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl: MONGO_URL,
-    }),
+    // store: MongoStore.create({
+    //   mongoUrl: MONGO_URL,
+    // }),
     cookie: { maxAge: 1000 * 60 * 60 * 24 * 90 },
   })
 );
@@ -40,8 +40,8 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: CLIENT_URL,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // allow session cookie from browser to pass through
   })
 );
@@ -49,4 +49,7 @@ app.use(
 // set up routes
 app.use("/auth", authRoutes);
 
-app.listen(port, () => console.log(`Server is running on port ${port}!`));
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}!`);
+  console.log(process.env.TWITTER_CONSUMER_KEY);
+});

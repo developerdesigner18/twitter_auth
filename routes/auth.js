@@ -13,6 +13,10 @@ router.get("/logout", (req, res) => {
   res.redirect(CLIENT_URL);
 });
 
+router.get('/env', (req, res) => {
+  console.log('env', process.env.TWITTER_CONSUMER_KEY);
+});
+
 router.get("/login", passport.authenticate("twitter"));
 
 router.get(
