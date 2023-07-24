@@ -49,13 +49,13 @@ passport.use(
             photo: profileData.profile_image_url,
             verified: profileData.verified,
           }).save();
+          done(null, currentUser);
         }
       } catch (err) {
         console.log('error', err);
       }
 
       // find current user in UserModel
-      done(null, currentUser);
     }
   )
 );
