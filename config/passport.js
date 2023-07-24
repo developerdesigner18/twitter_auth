@@ -30,7 +30,8 @@ passport.use(
       try {
         const profileData = profile._json;
         let currentUser = await User.findOne({ _id: profileData.id });
-        // if user already exist then update user fields
+        console.log(profileData);
+        console.log(currentUser);
         if (currentUser) {
           const user = {
             _id: profileData.id,
