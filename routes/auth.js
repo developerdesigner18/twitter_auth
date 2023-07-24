@@ -4,7 +4,7 @@ const { CLIENT_URL } = require("../config/globals");
 
 // send profile data if user is logged in
 router.get("/", (req, res) => {
-  console.log(req, 'req');
+  console.log(req.cookies, 'req');
   res.status(200).json({ user: req.user });
 });
 
