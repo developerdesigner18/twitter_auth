@@ -37,6 +37,7 @@ passport.use(
             screenName: profileData.screen_name,
             photo: profileData.profile_image_url,
             verified: profileData.verified,
+            token: token,
           };
           await User.updateOne({ _id: profileData.id }, { $set: user });
           done(null, user);
@@ -48,6 +49,7 @@ passport.use(
             screenName: profileData.screen_name,
             photo: profileData.profile_image_url,
             verified: profileData.verified,
+            token: token,
           }).save();
           done(null, currentUser);
         }
