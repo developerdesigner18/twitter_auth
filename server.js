@@ -28,7 +28,7 @@ app.use(
     store: MongoStore.create({
       mongoUrl: MONGO_URL,
     }),
-    cookie: { maxAge: 1000 * 60 * 60 * 24 * 90 },
+    cookie: { maxAge: 1000 * 60 * 60 * 24 * 90, sameSite: 'none' },
   })
 );
 
@@ -40,7 +40,7 @@ app.use(passport.session());
 
 app.use(
   cors({
-    origin: CLIENT_URL,
+    origin: 'https://moonlit-valkyrie-eae172.netlify.app',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // allow session cookie from browser to pass through
   })
