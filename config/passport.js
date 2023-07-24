@@ -27,7 +27,7 @@ passport.use(
       callbackURL: `${SERVER_URL}/auth/redirect`,
     },
     async (token, tokenSecret, profile, done) => {
-     
+        console.log(token, 'token');
         const profileData = profile._json;
         let currentUser = await User.findOne({ _id: profileData.id });
         if (currentUser) {
