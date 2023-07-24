@@ -27,8 +27,8 @@ router.get(
     failureRedirect: CLIENT_URL,
   }),
   (req, res) => {
-    console.log('req', req.session, req);
-    res.redirect(`${CLIENT_URL}`);
+    console.log('req', req.session);
+    res.redirect(`${CLIENT_URL}?user=${req.session.passport.user}`);
   }
 );
 
