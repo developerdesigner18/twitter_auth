@@ -5,6 +5,7 @@ const userSchema = mongoose.Schema({
   screenName: String,
   photo: String,
   verified: Boolean,
+  token: String
 });
 
 const User = mongoose.model("user", userSchema);
