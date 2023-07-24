@@ -1,7 +1,7 @@
 module.exports.CLIENT_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : 'https://moonlit-valkyrie-eae172.netlify.app/';
+    : 'https://moonlit-valkyrie-eae172.netlify.app';
 
 module.exports.SERVER_URL =
   process.env.NODE_ENV === 'development'
