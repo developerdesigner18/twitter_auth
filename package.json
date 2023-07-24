@@ -5,7 +5,7 @@
   "scripts": {
     "db": "mkdir mongo; mongod --dbpath mongo",
     "dev": "NODE_ENV=development nodemon server.js",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",

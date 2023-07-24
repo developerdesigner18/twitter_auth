@@ -2,13 +2,14 @@ const User = require('../models/user');
 
 const getUserData = async (req, res) => {
   try {
-    console.log(req.body);
-    let data = await User.findById(req.userId);
+    console.log(req.body, 'hello');
+
+    let data = await User.findById({ _id: req.body.userId });
     console.log(data);
-    res.send(200).json({ success: true, data: data });
+    res.status(200).send({success: true, data: data})
   } catch (error) {
     console.log(error);
-    res.send(400).json({ success: false });
+    res.status(400).send({success: false, data: error})
   }
 };
 
