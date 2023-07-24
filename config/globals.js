@@ -6,7 +6,7 @@ module.exports.CLIENT_URL =
 module.exports.SERVER_URL =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:4000'
-    : 'http://twitterauthdemo.eu-4.evennode.com/';
+    : 'https://twittwe-auth-backend.onrender.com/';
 
 module.exports.MONGO_URL =
   process.env.NODE_ENV === 'development'
