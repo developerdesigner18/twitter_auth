@@ -27,30 +27,34 @@ passport.use(
       callbackURL: `${SERVER_URL}/auth/redirect`,
     },
     async (token, tokenSecret, profile, done) => {
-      const profileData = profile._json;
+      try {
+        const profileData = profile._json;
+        let currentUser = await User.findOne({ _id: profileData.id });
+        // if user already exist then update user fields
+        if (currentUser) {
+          const user = {
+            _id: profileData.id,
+            name: profileData.name,
+            screenName: profileData.screen_name,
+            photo: profileData.profile_image_url,
+            verified: profileData.verified,
+          };
+          await User.updateOne({ _id: profileData.id }, { $set: user });
+        } else {
+          // create new user if the database doesn't have this user
+          currentUser = await new User({
+            _id: profileData.id,
+            name: profileData.name,
+            screenName: profileData.screen_name,
+            photo: profileData.profile_image_url,
+            verified: profileData.verified,
+          }).save();
+        }
+      } catch (err) {
+        console.log('error', err);
+      }
 
       // find current user in UserModel
-      let currentUser = await User.findOne({ _id: profileData.id });
-      // if user already exist then update user fields
-      if (currentUser) {
-        const user = {
-          _id: profileData.id,
-          name: profileData.name,
-          screenName: profileData.screen_name,
-          photo: profileData.profile_image_url,
-          verified: profileData.verified,
-        };
-        await User.updateOne({ _id: profileData.id }, { $set: user });
-      } else {
-        // create new user if the database doesn't have this user
-        currentUser = await new User({
-          _id: profileData.id,
-          name: profileData.name,
-          screenName: profileData.screen_name,
-          photo: profileData.profile_image_url,
-          verified: profileData.verified,
-        }).save();
-      }
       done(null, currentUser);
     }
   )
