@@ -27,11 +27,9 @@ passport.use(
       callbackURL: `${SERVER_URL}/auth/redirect`,
     },
     async (token, tokenSecret, profile, done) => {
-      try {
+     
         const profileData = profile._json;
         let currentUser = await User.findOne({ _id: profileData.id });
-        console.log(profileData);
-        console.log(currentUser);
         if (currentUser) {
           const user = {
             _id: profileData.id,
@@ -41,6 +39,7 @@ passport.use(
             verified: profileData.verified,
           };
           await User.updateOne({ _id: profileData.id }, { $set: user });
+          done(null, user);
         } else {
           // create new user if the database doesn't have this user
           currentUser = await new User({
@@ -52,9 +51,7 @@ passport.use(
           }).save();
           done(null, currentUser);
         }
-      } catch (err) {
-        console.log('error', err);
-      }
+     
 
       // find current user in UserModel
     }
