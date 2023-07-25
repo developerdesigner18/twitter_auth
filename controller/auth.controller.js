@@ -6,10 +6,10 @@ const getUserData = async (req, res) => {
 
     let data = await User.findById({ _id: req.body.userId });
     console.log(data);
-    res.status(200).send({success: true, data: data})
+    res.send({ success: true, data });
   } catch (error) {
     console.log(error);
-    res.status(400).send({success: false, data: error})
+    res.send({success: false, data: null})
   }
 };
 
